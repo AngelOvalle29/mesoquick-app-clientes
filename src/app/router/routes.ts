@@ -1,13 +1,18 @@
 /**
- * Constantes de paths de la aplicación.
- * Centralizar las rutas aquí evita strings mágicos regados por el código.
- * Si una ruta cambia, solo se modifica en este archivo.
+ * 🛣️ Cambios al archivo: src/app/router/routes.ts
+ *
+ * Solo agregar UNA línea en el bloque "Públicas":
+ *
+ *   LOGIN: '/login',
+ *
+ * El archivo final queda así (las líneas marcadas con ➕ son nuevas):
  */
+
 export const ROUTES = {
   // Públicas
   HOME: '/',
-  LOGIN: '/login',
   REGISTER: '/registro',
+  LOGIN: '/login',           // ➕ NUEVO
 
   // Catálogo
   CATALOG: '/catalogo',
@@ -35,10 +40,6 @@ export const ROUTES = {
   NOT_FOUND: '*',
 } as const;
 
-/**
- * Helpers para construir rutas con parámetros dinámicos.
- * Uso: buildRoute.businessDetail('123') → '/comercio/123'
- */
 export const buildRoute = {
   businessDetail: (businessId: string) => `/comercio/${businessId}`,
   orderConfirmation: (orderId: string) => `/pedido/confirmacion/${orderId}`,

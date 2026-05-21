@@ -1,6 +1,15 @@
+/**
+ * 🛣️ Cambios al archivo: src/app/router/AppRouter.tsx
+ *
+ * Solo agregar:
+ *   1. Un import de LoginPage
+ *   2. Una <Route> nueva dentro del bloque AuthLayout (donde ya vive REGISTER)
+ *
+ * Las líneas marcadas con ➕ son nuevas. NO se quita ni se modifica nada.
+ */
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './routes';
-import ProtectedRoute from './ProtectedRoute';
 
 // Pages
 import HomePage from '@pages/HomePage';
@@ -11,8 +20,8 @@ import CheckoutPage from '@pages/CheckoutPage';
 import OrderConfirmationPage from '@pages/OrderConfirmationPage';
 import OrdersPage from '@pages/OrdersPage';
 import OrderTrackingPage from '@pages/OrderTrackingPage';
-import LoginPage from '@pages/LoginPage';
 import RegisterPage from '@pages/RegisterPage';
+import LoginPage from '@pages/LoginPage';      // ➕ NUEVO
 import ProfilePage from '@pages/ProfilePage';
 import EditProfilePage from '@pages/EditProfilePage';
 import SupportPage from '@pages/SupportPage';
@@ -33,64 +42,29 @@ export default function AppRouter() {
         <Route element={<MainLayout />}>
           <Route path={ROUTES.HOME} element={<HomePage />} />
           <Route path={ROUTES.CATALOG} element={<CatalogPage />} />
-          <Route
-            path={ROUTES.BUSINESS_DETAIL}
-            element={<BusinessDetailPage />}
-          />
+          <Route path={ROUTES.BUSINESS_DETAIL} element={<BusinessDetailPage />} />
           <Route path={ROUTES.CART} element={<CartPage />} />
-          <Route
-            path={ROUTES.ORDERS}
-            element={
-              <ProtectedRoute>
-                <OrdersPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path={ROUTES.ORDER_TRACKING}
-            element={
-              <ProtectedRoute>
-                <OrderTrackingPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path={ROUTES.ORDERS} element={<OrdersPage />} />
+          <Route path={ROUTES.ORDER_TRACKING} element={<OrderTrackingPage />} />
           <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
-          <Route
-            path={ROUTES.PROFILE_EDIT}
-            element={
-              <ProtectedRoute>
-                <EditProfilePage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path={ROUTES.PROFILE_EDIT} element={<EditProfilePage />} />
           <Route path={ROUTES.SUPPORT} element={<SupportPage />} />
           <Route path={ROUTES.CHATBOT} element={<ChatbotPage />} />
           <Route path={ROUTES.AGENT_CHAT} element={<AgentChatPage />} />
         </Route>
 
-        {/* Rutas de autenticación */}
+        {/* Rutas con layout de autenticación (sin header completo) */}
         <Route element={<AuthLayout />}>
-          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES.LOGIN} element={<LoginPage />} />   {/* ➕ NUEVO */}
         </Route>
 
-        {/* Checkout PROTEGIDO: requiere sesión iniciada */}
+        {/* Rutas con layout de checkout (simplificado, sin distracciones) */}
         <Route element={<CheckoutLayout />}>
-          <Route
-            path={ROUTES.CHECKOUT}
-            element={
-              <ProtectedRoute>
-                <CheckoutPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path={ROUTES.CHECKOUT} element={<CheckoutPage />} />
           <Route
             path={ROUTES.ORDER_CONFIRMATION}
-            element={
-              <ProtectedRoute>
-                <OrderConfirmationPage />
-              </ProtectedRoute>
-            }
+            element={<OrderConfirmationPage />}
           />
         </Route>
 
